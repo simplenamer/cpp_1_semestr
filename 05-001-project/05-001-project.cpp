@@ -10,7 +10,7 @@ Lesson 02.
 @author Shamil Khaydarov
 */
 
-int main()
+int main2()
 {
     //setlocale(LC_ALL, "RUS");
     //cout << "Hello World!\n" << endl;
