@@ -22,7 +22,7 @@ string* split(string str, string delimeter = " ") {
 
 	return result;
 }
-// split("string example", "string") => ["", " example"]1
+// split("str ing example", "string") => ["", " example"]1
 
 
 void lesson_07() {
@@ -110,6 +110,6 @@ void lesson_07() {
 
 }
 
-int main() {
-	lesson_07();
-}
+//int main() {
+//	lesson_07();
+//}
