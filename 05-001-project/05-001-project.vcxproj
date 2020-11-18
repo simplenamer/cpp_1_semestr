@@ -148,11 +148,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="05-001-project.cpp" />
+    <ClCompile Include="CW1-Ans.cpp" />
     <ClCompile Include="Lesson_04.cpp" />
     <ClCompile Include="Lesson_05.cpp" />
     <ClCompile Include="Lesson_06.cpp" />
     <ClCompile Include="Lesson_07.cpp" />
     <ClCompile Include="Lesson_08.cpp" />
+    <ClCompile Include="Lesson_09.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

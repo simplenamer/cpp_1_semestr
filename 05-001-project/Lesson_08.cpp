@@ -10,6 +10,18 @@ int dictLength = 0;
 string* history;
 int histSize = 0;
 
+
+bool in_array(string findMe, string* arr, int length) {
+
+	for (int i = 0; i < length; i++)
+	{
+		if (arr[i] == findMe) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void readDictionary(const char* filename) {
 	setlocale(LC_ALL, "ru_RU");
 	ifstream file(filename);
@@ -69,12 +81,8 @@ string* generateWords(string in, int& size) {
 		{
 			current[i] = abc[j];
 			//current.replace(i, 1, abc.substr(j, 1));
-			for (int k = 0; k < dictLength; k++)
-			{
-				if (current == dict[k] && current != in) {
-					add(result, size, current);
-					break;
-				}
+			if (in_array(current, dict, dictLength) && current != in) {
+				add(result, size, current);
 			}
 		}
 	}
@@ -88,18 +96,22 @@ void game(string in, string out) {
 	cout << in << ": ";
 
 	int size = 0;
+
+	add(history, histSize, in);
 	string* newWords = generateWords(in, size);
 	print(newWords, size);
 
 	for (int i = 0; i < size; i++)
 	{
-		game(newWords[i], out);
+		if (!in_array(newWords[i], history, histSize)) {
+			game(newWords[i], out);
+		}
 	}
 
 }
 
 
-int main() {
+int main4() {
 	readDictionary("dict_len4_ansi.txt");
 
 	string in = "стук";
@@ -108,5 +120,5 @@ int main() {
 	game(in, out);
 
 
-
+	return 0;
 }
