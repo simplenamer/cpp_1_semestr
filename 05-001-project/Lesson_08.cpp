@@ -68,7 +68,63 @@ void print(string* strs, int& size) {
 	}
 }
 
-string* generateWords(string in, int& size) {
+int compareStrings(const string& left, const string& right) {
+
+	int length = min(left.length(), right.length());
+	string abc = "אבגדהו¸זחטיךכלםמןנסעףפץצקרשתûü‎‏ÿ";
+	// todo
+	for (int i = 0; i < length; i++)
+	{
+		unsigned char c1 = (left.at(i)) * 2;
+		unsigned char c2 = (right.at(i)) * 2;
+		if ((left.at(i)) == '¸') {
+			c1 = 'ו' * 2 + 1;
+		}
+
+		if ((right.at(i)) == '¸') {
+			c2 = 'ו' * 2 + 1;
+		}
+
+		//if (c1 != c2) return c1 - c2;
+
+		if (c1 < c2) {
+			return -1;
+		}
+
+		if (c1 > c2) {
+			return 1;
+		}
+	}
+	//return left.length() - right.length();
+	if (left.length() < right.length()) return -1;
+	else if (left.length() > right.length()) return 1;
+
+	return 0;
+}
+
+bool binary_search(string& findMe, string*& arr, int length) {
+	int left = 0;
+	int right = length - 1;
+
+	while (left <= right) {
+		int middle = (right + left) / 2;
+		//if (arr[middle] < findMe) {
+		if (compareStrings(arr[middle], findMe) < 0) {
+			left = middle + 1;
+		}
+		//else if (arr[middle] > findMe) {
+		else if (compareStrings(arr[middle], findMe) > 0) {
+			right = middle - 1;
+		}
+		else {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+string* generateWords(string& in, int& size) {
 	add(history, histSize, in);
 	string abc = "אבגדהו¸זחטיךכלםמןנסעףפץצקרשתûü‎‏ÿ";
 	int count = 0;
@@ -81,7 +137,7 @@ string* generateWords(string in, int& size) {
 		{
 			current[i] = abc[j];
 			//current.replace(i, 1, abc.substr(j, 1));
-			if (in_array(current, dict, dictLength) && current != in) {
+			if (current != in && binary_search(current, dict, dictLength)) {
 				add(result, size, current);
 			}
 		}
@@ -89,7 +145,7 @@ string* generateWords(string in, int& size) {
 	return result;
 }
 
-void game(string in, string out) {
+void game(string& in, string& out) {
 
 	if (in == out) return;
 
@@ -111,7 +167,7 @@ void game(string in, string out) {
 }
 
 
-int main4() {
+int main() {
 	readDictionary("dict_len4_ansi.txt");
 
 	string in = "סעףך";
