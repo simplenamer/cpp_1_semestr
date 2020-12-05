@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int x, n;
+    setlocale(LC_ALL, "Russian");
+    cout << "введите х и n" << endl;
+    cin >> x >> n;
+    double sum, save_x, a, b;
+    b = 1;
+    a = 1;
+    save_x = x;
+    sum = x;
+    //функция считающая нужную сумму
+    for (int i = 1; i < n; i++)
+    {
+        x = x * save_x * save_x;                                    //возведение в степень
+        b = b * (2 * i - 1);                        //подсчёт числителя
+        a = a * 2 * i * (2 * i + 1);            //подсчёт знаминателя
+        sum = sum + x * b / a;                    //сумма
+    }
+    cout << sum << endl;
+    return 0;
+}
